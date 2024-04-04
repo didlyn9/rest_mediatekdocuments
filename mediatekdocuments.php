@@ -9,7 +9,10 @@ if(!isset($_SERVER['PHP_AUTH_USER']) || (isset($_SERVER['PHP_AUTH_USER']) &&
     $controle->unauthorized();
     
 }else{
-    
+    if(isset($_GET['error']) && $_GET['error'] == 404){
+        echo json_encode(array("message" => "404 Not Found "));
+        exit();
+    }
     // récupération des données
     // Nom de la table au format string
     $table = filter_input(INPUT_GET, 'table', FILTER_SANITIZE_STRING) ??
